@@ -1,0 +1,57 @@
+<!doctype html>
+  <title>Mithril Todo</title>
+  <script src="mithril.min.js"></script>
+  <script>
+    var todo = {};
+
+    todo.Todo = function(data){
+      this.description = m.prop(data.description);
+      this.done = m.prop(false);
+    };
+
+    todo.TodoList = Array;
+
+    todo.vm = {
+      init: function(){
+        todo.vm.list = new todo.TodoList();
+
+        todo.vm.description = m.prop("");
+
+        todo.vm.add = function(description){
+          if (description()){
+            todo.vm.list.push(new todo.Todo({description: description()}));
+            todo.vm.description("");
+          }
+        };
+      }
+    };
+
+    todo.controller = function(){
+      todo.vm.init();
+    };
+
+    todo.view = function() {
+      return m("html", [
+        m("body", [
+          m("input", {onchange: m.withAttr("value", todo.vm.description), value: todo.vm.description()}),
+          m("button", "Add"),
+          m("table", [
+            m("tr",[
+              m("td", [
+                m("input[type=checkbox]")
+              ]),
+              m("td", "task description"),
+            ])
+          ])
+        ])
+      ]);
+    }
+    todo.vm.init()
+
+    todo.vm.description();
+    m.render(document, todo.view());
+
+    todo.vm.description("Write code");
+    m.render(document, todo.view());
+
+  </script>
