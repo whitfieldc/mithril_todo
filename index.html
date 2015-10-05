@@ -25,7 +25,7 @@
           }
         };
       }
-      return vm
+      return vm;
     }())
 
     todo.controller = function(){
@@ -50,14 +50,5 @@
         ])
       ]);
     }
-    // todo.vm.init()
-
-    // todo.vm.description();
-    // m.render(document, todo.view());
-
-    // todo.vm.description("Write code");
-    // m.render(document, todo.view());
-
     m.mount(document, {controller: todo.controller, view: todo.view});
-
   </script>
